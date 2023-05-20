@@ -8,11 +8,25 @@ library(quantmod)
 
 
 
-time_span <- c("2019-12-02", "202-12-01")
-stocks <- c("AAPL", "JPM")
+log_returns <- function(df){
+  r <- rep(0, dim(df)[1])
+  
+  for (i in 2 : length(r)){
+    r[i] = log(df$Close[i]) - log(df$Close[i-1])
+  }
+  
+  return(r)
+}
 
 
-
-AAPL <- get.hist.quote(ins)
-
-
+discrete_returns <- function(df){
+  R <- rep(0, dim(df)[1])
+  
+  for (i in 2 : length(R)){
+    R[i] = (df$Close[i] - df$Close[i-1]) / df$Close[i-1]
+  }
+  
+  return(R)
+  
+  
+}
