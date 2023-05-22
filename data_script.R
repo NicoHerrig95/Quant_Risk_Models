@@ -1,5 +1,7 @@
 # working script R ####
 
+
+############################# PRE-LOADS ########################################
 # setting working directory
 current_path = rstudioapi::getActiveDocumentContext()$path 
 setwd(dirname(current_path ))
@@ -10,13 +12,15 @@ source("utility.R")
 
 
 # parameters for stock downloads (tickers and time span)
-time_span <- c("2019-12-02", "2020-12-01")
 stocks <- c("JPM", "AAPL")
-
+time_span <- c("2019-12-02", "2020-12-01")
 
 
 # downloading stock data from yahoo finance
 for(i in 1 : length(stocks)){
+  # download quotes from yahoo finance and assigning to
+  # data frame by referring to ticker
+  # list of tickers is stored in object "stocks" 
   assign(stocks[i],
          get.hist.quote(stocks[i],
                         start = time_span[1],
@@ -26,9 +30,25 @@ for(i in 1 : length(stocks)){
 }
 
 
+# adding discrete and logarithmic returns
+for (i in 1 : length(stocks)){
+  assign(stocks[i],
+         eval(as.name(stocks[i])) %>% 
+           # discrete returns
+           mutate(R = discrete_returns(eval(as.name(stocks[i])))) %>% 
+           # log returns
+           mutate(r = log_returns(eval(as.name(stocks[i]))))
+  )}
 
-discrete_returns(AAPL)
-log_returns(AAPL)
+
+
+
+
+
+
+
+
+
 
 
 
