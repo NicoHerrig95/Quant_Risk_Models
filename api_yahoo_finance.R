@@ -1,7 +1,15 @@
-# working script R ####
+# Data download from Yahoo Finance####
 
 
-############################# PRE-LOADS ########################################
+# stock downloads (tickers and time span)
+stocks <- c("JPM", "AAPL")
+time_span <- c("2019-12-02", "2020-12-01")
+
+
+
+
+
+############################# PRE-LOADING #######################################
 # setting working directory
 current_path = rstudioapi::getActiveDocumentContext()$path 
 setwd(dirname(current_path ))
@@ -11,10 +19,10 @@ print( getwd() )
 source("utility.R")
 
 
-# parameters for stock downloads (tickers and time span)
-stocks <- c("JPM", "AAPL")
-time_span <- c("2019-12-02", "2020-12-01")
 
+
+
+######################### Data download and transformation #####################
 
 # downloading stock data from yahoo finance
 for(i in 1 : length(stocks)){
@@ -37,7 +45,9 @@ for (i in 1 : length(stocks)){
            # discrete returns
            mutate(R = discrete_returns(eval(as.name(stocks[i])))) %>% 
            # log returns
-           mutate(r = log_returns(eval(as.name(stocks[i]))))
+           mutate(r = log_returns(eval(as.name(stocks[i])))) %>% 
+           # date 
+           mutate(date = rownames(AAPL) %>% as.Date, .before = Close)
   )}
 
 

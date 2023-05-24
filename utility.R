@@ -5,9 +5,11 @@ library(tidyverse)
 library(zoo)
 library(lubridate)
 library(quantmod)
+library(fGarch)
 
 
 
+##### return functions #####
 log_returns <- function(df){
   r <- rep(0, dim(df)[1])
   

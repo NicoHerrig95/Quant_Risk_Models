@@ -6,7 +6,12 @@ setwd(dirname(current_path ))
 print( getwd() )
 
 # sourcing utility script (dependencies and functions)
-source("data_infrastructure.R")
+source("api_yahoo_finance.R")
+
+
+
+
+# fitting GARCH(1,1) model
 
 
 
