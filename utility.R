@@ -7,28 +7,42 @@ library(lubridate)
 library(quantmod)
 library(fGarch)
 
+############################# PRE-LOADING ######################################
+# setting working directory
+current_path = rstudioapi::getActiveDocumentContext()$path 
+setwd(dirname(current_path ))
+print( getwd() )
 
+# sourcing from initialisation script
+source("initialisation.R")
+
+
+
+
+
+############################# UTILITY FUNCTIONS #################################
 
 ##### return functions #####
-log_returns <- function(df){
-  r <- rep(0, dim(df)[1])
+
+
+# computing log returns
+log_returns <- function(price){
+  r <- rep(NA, length(price))
   
   for (i in 2 : length(r)){
-    r[i] = log(df$Close[i]) - log(df$Close[i-1])
+    r[i] = log(price[i]) - log(price[i-1])
   }
-  
   return(r)
 }
 
 
-discrete_returns <- function(df){
-  R <- rep(0, dim(df)[1])
+# computing discrete returns
+discrete_returns <- function(price){
+  R <- rep(NA, length(price))
   
   for (i in 2 : length(R)){
-    R[i] = (df$Close[i] - df$Close[i-1]) / df$Close[i-1]
+    R[i] = (price[i] - price[i-1]) / price[i-1]
   }
-  
+ 
   return(R)
-  
-  
 }

@@ -9,34 +9,74 @@ current_path = rstudioapi::getActiveDocumentContext()$path
 setwd(dirname(current_path ))
 print( getwd() )
 
-# sourcing yahoo_finance API script 
-# parameters must be adjusted in the respective API script
-source("api_yahoo_finance.R")
 
+# sourcing initialisation parameters
+source("initialisation.R")
+
+# sourcing API script 
+if (data_source == "yahoo_finance"){
+  source("api_yahoo_finance.R")
+} 
 
 
 
 ################### MEAN-VARIANCE MODEL (parametric) ###########################
 
-# checking this up!!!!! 
-# adds parametric VaR forecast to data frame
-par_VaR_single <- function(df, alpha, d = 60){
+
+# parametric VaR forecast 
+par_VaR <- function(returns, alpha, d){
+  z = qnorm(1-alpha)
+  par_VaR <- rep(NA, length(returns))
   
-  z = qnorm(1-alpha) # defining z_a
-  df$par_VaR <-  NA # pre-allocating NA values
-  
-  # from d+1 to exclude the 0% return for first observation
-  for (i in (d+1) : dim(df)[1]){ 
+  for (i in (d+2) : length(returns)){
+    mu = returns[(i-1):(i-d)] %>% mean()
+    sigma = returns[(i-1):(i-d)] %>% sd()
     
-    # equation: mean + z_a * sigma
-    df$par_VaR[i] = (df$R[(i-1):(i-d)] %>% mean()) + z * (df$R[(i-1):(i-d)] %>% sd())
+    par_VaR[i] = mu + z * sigma
   }
   
-  return(df)
+  return(par_VaR)
 }
 
 
-AAPL$par_VaR <- par_VaR_single(AAPL, d = 60, alpha = 0.99)$par_VaR
+
+################### HISTORICAL SIMULATIONS (non-parametric) #####################
+
+non_par_VaR <- function(returns, alpha, d){
+  z = qnorm(1-alpha)
+  non_par_VaR <- rep(NA, length(returns))
+  
+  for (i in (d+2) : length(returns)){
+    # empirical alpha quantile of the d prior returns
+    non_par_VaR[i] = quantile(returns[(i-1):(i-d)], probs = (1 - alpha), na.rm = TRUE)
+  }
+  return(non_par_VaR)
+}
+
+
+
+
+# computing parametric and non-parametric approach
+# and adding to respective data frame
+for (i in 1 : length(stocks)){
+  assign(stocks[i],
+         eval(as.name(stocks[i])) %>% 
+           # parametric approach
+           mutate(par_VaR = par_VaR(eval(as.name(stocks[i]))$R, alpha = alpha, d = d)) %>% 
+           # non-parametric approach (historical simulations)
+           mutate(non_par_VaR = non_par_VaR(eval(as.name(stocks[i]))$R, alpha = alpha, d = d))
+           
+         
+  )}
+
+
+
+
+
+
+
+
+
 
 
 
