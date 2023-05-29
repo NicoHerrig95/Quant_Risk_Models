@@ -48,7 +48,9 @@ non_par_VaR <- function(returns, alpha, d){
   
   for (i in (d+2) : length(returns)){
     # empirical alpha quantile of the d prior returns
-    non_par_VaR[i] = quantile(returns[(i-1):(i-d)], probs = (1 - alpha), na.rm = TRUE)
+    non_par_VaR[i] = quantile(returns[(i-1):(i-d)],
+                              probs = (1 - alpha),
+                              na.rm = TRUE)
   }
   return(non_par_VaR)
 }
@@ -62,9 +64,13 @@ for (i in 1 : length(stocks)){
   assign(stocks[i],
          eval(as.name(stocks[i])) %>% 
            # parametric approach
-           mutate(par_VaR = par_VaR(eval(as.name(stocks[i]))$R, alpha = alpha, d = d)) %>% 
+           mutate(par_VaR = par_VaR(eval(as.name(stocks[i]))$R,
+                                    alpha = alpha,
+                                    d = d)) %>% 
            # non-parametric approach (historical simulations)
-           mutate(non_par_VaR = non_par_VaR(eval(as.name(stocks[i]))$R, alpha = alpha, d = d))
+           mutate(non_par_VaR = non_par_VaR(eval(as.name(stocks[i]))$R,
+                                            alpha = alpha,
+                                            d = d))
            
          
   )}
