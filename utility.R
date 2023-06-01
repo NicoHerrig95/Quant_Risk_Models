@@ -6,6 +6,7 @@ library(zoo)
 library(lubridate)
 library(quantmod)
 library(fGarch)
+library(Dowd)
 
 ############################# PRE-LOADING ######################################
 # setting working directory
