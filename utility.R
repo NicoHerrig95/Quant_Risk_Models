@@ -7,6 +7,7 @@ library(lubridate)
 library(quantmod)
 library(fGarch)
 library(Dowd)
+library(readxl)
 
 ############################# PRE-LOADING ######################################
 # setting working directory
