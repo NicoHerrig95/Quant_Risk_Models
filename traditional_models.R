@@ -16,7 +16,10 @@ source("initialisation.R")
 # sourcing API script 
 if (data_source == "yahoo_finance"){
   source("api_yahoo_finance.R")
-} 
+} else if (data_source = "refinitiv") {
+  source("refinitiv_data_sourcer.R")
+}
+
 
 
 
