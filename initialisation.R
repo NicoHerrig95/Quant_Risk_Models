@@ -4,7 +4,7 @@
 # Either "yahoo_finance" or "refinitiv" 
 # -> data is either diretly downloaded from yahoo finance, or local .xlsx file
 # is used (from Refinitiv). The later is for usage in the dissertation
-data_source <- "yahoo_finance"
+data_source <- "refinitiv"
 
 
 ############# Instruments and time parameters ################################## 
