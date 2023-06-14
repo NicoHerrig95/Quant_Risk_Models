@@ -112,8 +112,8 @@ if (GARCH_1_1_normal %>% length() == GARCH_1_1_GED %>% length()){
   for (i in 1 : length(GARCH_1_1_normal)){
     
     # @fit$ics calls AIC score from S4 object (GARCH model)
-    if (eval(as.name(GARCH_1_1_normal[i]))@fit$ics[i] <
-        eval(as.name(GARCH_1_1_GED[i]))@fit$ics[i]){
+    if (eval(as.name(GARCH_1_1_normal[i]))@fit$ics[1] <
+        eval(as.name(GARCH_1_1_GED[i]))@fit$ics[1]){
       # assigning model with lower AIC score as best model
       best_models[i] <- GARCH_1_1_normal[i]
     } else {
@@ -130,31 +130,58 @@ cat("optimal models from automated model selection (AIC):", "\n", best_models)
 ###################### VaR Forecasts ###########################################
 
 
-# index of (first) observation which is on or after the start of testing period
-# indexing t+1
-t_plus_one <- which(eval(as.name(stocks[1]))$date >= test_date) %>% head(n = 1)
-# t
-t <- t_plus_one - 1
-# all return from 1,...,t
-returns <- eval(as.name(stocks[1]))[2:t,"R"]
+for(i in 1 : length(stocks)){
+  
+  # t_plus_one is initially index of row of
+  # the beginning date from testing period
+  t_plus_one <- which(eval(as.name(stocks[i]))$date >= test_date) %>% head(n = 1)
+  
+  # a storer vector for GARCH VaR forecasts with same length as data frame
+  storer <- rep(NA, times = dim(eval(as.name(stocks[i])))[1]) 
+  
+  
+  
+  # LOOP for generating VaR forecast based on the respective rolling window
+  repeat{
+    # t (last observation of rolling window period)
+    
+    t <- t_plus_one - 1
+    # first observation of rolling window period (t - d)
+    s <- t - d
+    # all return from 1,...,t
+    returns <- eval(as.name(stocks[i]))[s:t,"R"]
+    
+    # (re-)fitting the GARCH(1,1) model to the data up until t
+    # using the distribution of innovations chosen by the automated selection (AIC)
+    working_model <- garchFit(formula = ~garch(1,1),
+                              # using the returns from rolling window for model fitting
+                              data = returns,
+                              # chosen distribution from the respective "best_model" object
+                              cond.dist = eval(as.name(best_models[i]))@fit$params$cond.dist,
+                              # no estimation of mu or skewness 
+                              include.mean = FALSE,
+                              include.skew = FALSE) 
+    
+    
+    # storing  VaR forecast in storer object
+    storer[t_plus_one] <-  GARCH_VaR(model = working_model)
+    
+    # breaking condition of repeat loop
+    if (t_plus_one == (dim(eval(as.name(stocks[i])))[1])){break}
+    
+    # indexing +1
+    t_plus_one <- t_plus_one + 1
+  }
+  
+  # assigning the forecast saved in storer object to respective data frame
+  # as "GARCH_VaR"
+  assign(stocks[i],eval(as.name(stocks[i])) %>%
+           mutate(GARCH_VaR = storer))
+  
+}
 
-# (re-)fitting the GARCH(1,1) model to the data up until t
-# using the distribution of innovations chosen by the automated selection (AIC)
-model <- garchFit(formula = ~garch(1,1),
-                  # "R[-1]" to exclude first NA return
-                  data = eval(as.name(stocks[i]))$R[-1],
-                  # chosen distribution from the respective "best_model" object
-                  cond.dist = "norm",
-                  # no estimation of mu or skewness 
-                  include.mean = FALSE,
-                  include.skew = FALSE) 
 
 
 
 
 
-
-
-
-
-eval(as.name(best_models[1]))    

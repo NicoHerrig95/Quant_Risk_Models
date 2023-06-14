@@ -11,7 +11,13 @@ data_source <- "refinitiv"
 # stocks:
 stocks <- c("JPM", "AAPL")
 
-# time parameters (starting date and )
+
+# start of testing period (separation of train set and test set)
+test_date <- "2021-01-01" # changing depending on new period for data
+
+
+
+############# YAHOO API - time parameters (starting date and end date) #########
 start = "2019-12-02"
 end = "2020-12-01"
 
@@ -23,12 +29,11 @@ alpha = 0.99
 
 ################### traditional models (mean-var approach & empirical VaR)####
 # lookback period (d)
-d = 60
+d = 150 # changing to around 1 year!
 
 
 ##############################   GARCH MODELS ############################## 
-p = 1
-q = 1
+
 
 
 
