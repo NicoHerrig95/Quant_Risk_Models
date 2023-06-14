@@ -14,6 +14,7 @@ print( getwd() )
 source("initialisation.R")
 
 # sourcing API script 
+# choosing data source based on parameters in initialisation script 
 if (data_source == "yahoo_finance"){
   source("api_yahoo_finance.R")
 } else if (data_source == "refinitiv") {
