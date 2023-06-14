@@ -10,7 +10,6 @@ print( getwd() )
 
 
 # sourcing initialisation parameters
-source("traditional_models.R")
 source("GARCH_models.R")
 
 

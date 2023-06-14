@@ -101,7 +101,7 @@ for (i in 1 : length(GARCH_1_1_GED)){
 
 
 
-#################### model selection ###########################################
+#################### Automated model selection #################################
 # implementing automated model selection based on Information Criterion score
 # here: AIC (AIC is sufficient as we aim for forecasting!)
 
