@@ -68,7 +68,7 @@ for (i in 1 : length(stocks)){
   assign(stocks[i],
          eval(as.name(stocks[i])) %>% 
            # parametric approach
-           mutate(par_VaR = par_VaR(eval(as.name(stocks[i]))$R,
+           mutate(CMM_VaR = par_VaR(eval(as.name(stocks[i]))$R,
                                     alpha = alpha,
                                     d = d)) %>% 
            # non-parametric approach (historical simulations)

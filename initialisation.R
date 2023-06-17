@@ -11,6 +11,9 @@ data_source <- "refinitiv"
 # stocks:
 stocks <- c("JPM", "AAPL")
 
+# Value of the Portfolio
+Pf <- 1000000
+
 
 # start of testing period (separation of train set and test set)
 test_date <- "2021-01-01" # changing depending on new period for data

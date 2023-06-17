@@ -39,7 +39,7 @@ GARCH_VaR <- function(model, alpha_lvl = alpha){
   
   # storing the last element of residuals() from garchFit object
   # this represents epsilon_t as usage for the VaR forcast for t+1!
-  epsilon_t <- tail(residuals(model), n = 1)
+  epsilon_t <- tail(fGarch::residuals(model), n = 1)
   
   # defining parameters for volatility equation
   a_0 <- model@fit$par['omega'] %>% unname()
@@ -177,6 +177,8 @@ for(i in 1 : length(stocks)){
   # as "GARCH_VaR"
   assign(stocks[i],eval(as.name(stocks[i])) %>%
            mutate(GARCH_VaR = storer))
+  
+  rm(storer) # deleting storer object
   
 }
 
