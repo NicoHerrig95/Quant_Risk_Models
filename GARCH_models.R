@@ -4,7 +4,7 @@
 # setting working directory
 current_path = rstudioapi::getActiveDocumentContext()$path 
 setwd(dirname(current_path ))
-print( getwd() )
+
 
 # sourcing prior script (traditional models)
 source("traditional_models.R") 
@@ -100,7 +100,6 @@ for (i in 1 : length(GARCH_1_1_GED)){
 
 
 
-
 #################### Automated model selection #################################
 # implementing automated model selection based on Information Criterion score
 # here: AIC (AIC is sufficient as we aim for forecasting!)
@@ -178,12 +177,19 @@ for(i in 1 : length(stocks)){
   assign(stocks[i],eval(as.name(stocks[i])) %>%
            mutate(GARCH_VaR = storer))
   
-  rm(storer) # deleting storer object
-  
 }
 
 
 
+# memory housekeeping
+rm(storer) # deleting storer object
+rm(working_model) # deleting working_model object
+rm(s)
+rm(t)
+rm(t_plus_one)
 
+
+
+print("--------- module GARCH_models - finished ---------")
 
 

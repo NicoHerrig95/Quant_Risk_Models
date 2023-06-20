@@ -7,7 +7,7 @@
 # setting working directory
 current_path = rstudioapi::getActiveDocumentContext()$path 
 setwd(dirname(current_path ))
-print( getwd() )
+
 
 
 # sourcing initialisation parameters
@@ -24,7 +24,7 @@ if (data_source == "yahoo_finance"){
 
 
 
-################### MEAN-VARIANCE MODEL (parametric) ###########################
+################### CMM MODEL (parametric) ###########################
 
 
 # parametric VaR forecast 
@@ -83,6 +83,7 @@ for (i in 1 : length(stocks)){
 
 
 
+print("--------- module traditional_models - finished ---------")
 
 
 

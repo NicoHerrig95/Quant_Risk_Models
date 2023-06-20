@@ -1,43 +1,53 @@
 ############# Initialisation Script ############################################
 
+# setting working directory
+current_path = rstudioapi::getActiveDocumentContext()$path 
+setwd(dirname(current_path ))
+print( getwd() )
+
+
+# DESCRIPTION:
+# Choosing stocks to be observed.
+# Setting parameters for model evaluation.
+
+
 
 # Either "yahoo_finance" or "refinitiv" 
 # -> data is either diretly downloaded from yahoo finance, or local .xlsx file
 # is used (from Refinitiv). The later is for usage in the dissertation
-data_source <- "refinitiv"
+data_source <- "yahoo_finance"
 
 
 ############# Instruments and time parameters ################################## 
 # stocks:
 stocks <- c("JPM", "AAPL")
 
-# Value of the Portfolio
+
+##### time parameters (starting date and end date) relevant for YAHOO API ######
+start = "2011-01-01"
+end = "2022-12-31"
+
+# Value of (imaginary) the Portfolio
 Pf <- 1000000
 
+# list of models used
+models <- c("historical", "CMM", "GARCH", "LSTM_NNet")
 
 # start of testing period (separation of train set and test set)
 test_date <- "2021-01-01" # changing depending on new period for data
-
-
-
-############# YAHOO API - time parameters (starting date and end date) #########
-start = "2019-12-02"
-end = "2020-12-01"
-
 
 
 ###### General parameters (usage in all models) ###############################  
 alpha = 0.99
 
 
-################### traditional models (mean-var approach & empirical VaR)####
 # lookback period (d)
-d = 150 # changing to around 1 year!
+d = 250 # changing to around 1 year!
 
 
-##############################   GARCH MODELS ############################## 
 
 
+print("--------- module initialisation - finished ---------")
 
 
 
