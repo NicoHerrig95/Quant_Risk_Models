@@ -23,7 +23,7 @@ if (run_program == T){
     print("----- ADDITIONAL INFORMATION OF TEST RUN -----")
     cat(" .", "\n")
     cat("time span for testing:","\n")
-    cat(test_date, "until", end, "\n")
+    cat(test_start, "until", test_end, "\n")
     cat(" .", "\n")
     cat("underlying alpha-level:", alpha, "\n")
     cat(" .", "\n")

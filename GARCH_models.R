@@ -133,7 +133,7 @@ for(i in 1 : length(stocks)){
   
   # t_plus_one is initially index of row of
   # the beginning date from testing period
-  t_plus_one <- which(eval(as.name(stocks[i]))$date >= test_date) %>% head(n = 1)
+  t_plus_one <- which(eval(as.name(stocks[i]))$date >= test_start) %>% head(n = 1)
   
   # a storer vector for GARCH VaR forecasts with same length as data frame
   storer <- rep(NA, times = dim(eval(as.name(stocks[i])))[1]) 

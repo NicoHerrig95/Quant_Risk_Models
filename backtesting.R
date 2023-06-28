@@ -141,8 +141,8 @@ for(i in 1:length(test_sets)){
   assign(test_sets[i],
          eval(as.name(stocks[i])) %>% 
            # subsetting observations which lie within the testing time frame
-           # i.e. observation where date > beginning of test period (=test_date)
-           subset(., date >= test_date) %>% 
+           # i.e. observation where date > beginning of test period 
+           subset(., date >= test_start & date <= test_end) %>% 
            dplyr::select(date,
                          one_day_loss,
                          CMM_VaR,
