@@ -2,12 +2,12 @@
 """
 Project:Neural Network for VaR forecasting
 Script name: dependencies
-author: Nico Herrig
+@author: nicoherrig
 """
 
-
-import numby as np
+import tensorflow as tf
+import numpy as np
 import pandas as pd
 
 
-
+DAX = pd.read_csv("DAX.csv")
