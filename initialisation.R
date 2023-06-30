@@ -11,7 +11,6 @@ print( getwd() )
 # Setting parameters for model evaluation.
 
 
-
 # Either "yahoo_finance" or "refinitiv" 
 # -> data is either diretly downloaded from yahoo finance, or local .xlsx file
 # is used (from Refinitiv). The later is for usage in the dissertation
@@ -20,7 +19,7 @@ data_source <- "yahoo_finance"
 
 ############# Instruments and time parameters ################################## 
 # stocks:
-stocks <- c("JPM", "AAPL", "DAX")
+stocks <- c("DAX", "AAPL", "JPM")
 
 
 ##### time parameters (starting date and end date) relevant for YAHOO API ######
@@ -45,6 +44,8 @@ alpha = 0.99
 
 # lookback period (d)
 d = 250 # changing to around 1 year!
+
+
 
 
 
