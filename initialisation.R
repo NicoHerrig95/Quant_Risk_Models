@@ -24,7 +24,7 @@ stocks <- c("DAX", "AAPL", "JPM")
 
 ##### time parameters (starting date and end date) relevant for YAHOO API ######
 # this indicates the date for the orginial data to be downloaded from YAHOO FINANCE
-start = "2011-01-01"
+start = "2001-01-01"
 end = "2023-05-10"
 
 # Value of (imaginary) the Portfolio

@@ -14,6 +14,10 @@ extract_files = T
 
 ################################################################################
 
+
+
+
+
 if (run_program == T){
   current_path = rstudioapi::getActiveDocumentContext()$path 
   setwd(dirname(current_path ))
@@ -23,6 +27,20 @@ if (run_program == T){
   print("----- RESULTS BACKTESTING -----")
   cat(" .", "\n",".", "\n")
   print(results_backtesting)
+  
+  
+  # safing data files in the data_files folder
+  if (extract_files == T) {
+    # defining file path of data extraction file
+    extraction_path = paste0(getwd(),"/data_files/")
+    
+    # function for storing the data tables as csv in respective data folder
+    for (i in 1 : length(stocks)){
+      write.csv(x = eval(as.name(stocks[i])),
+                file = paste0(extraction_path, stocks[i],".csv"))
+    }
+    
+  }
   
   
   # additional information
@@ -56,17 +74,6 @@ if (run_program == T){
 
 
 
-# safing data files in the data_files folder
-if (extract_files == T) {
-  # defining file path of data extraction file
-  extraction_path = paste0(getwd(),"/data_files/")
-  
-  # function for storing the data tables as csv in respective data folder
-  for (i in 1 : length(stocks)){
-    write.csv(x = eval(as.name(stocks[i])),
-              file = paste0(extraction_path, stocks[i],".csv"))
-  }
-  
-}
+
 
 
