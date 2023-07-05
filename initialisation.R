@@ -19,7 +19,7 @@ data_source <- "yahoo_finance"
 
 ############# Instruments and time parameters ################################## 
 # stocks:
-stocks <- c("DAX", "AAPL", "JPM")
+stocks <- c("^GSPC", "^FTSE", "^STOXX50E")
 
 
 ##### time parameters (starting date and end date) relevant for YAHOO API ######
@@ -34,8 +34,8 @@ Pf <- 1000000
 models <- c("historical", "CMM", "GARCH", "LSTM_NNet")
 
 # start of testing period (separation of train set and test set)
-test_start <- "2021-01-01" # changing depending on new period for data
-test_end <- "2022-12-31"
+test_start <- "2017-01-01" # changing depending on new period for data
+test_end <- "2019-12-31"
 
 
 ###### General parameters (usage in all models) ###############################  

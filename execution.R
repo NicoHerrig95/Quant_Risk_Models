@@ -9,7 +9,7 @@ run_program = T
 add_info = T
 
 # extracting data files to the data_files folder
-extract_files = T
+extract_files = F
 
 
 ################################################################################
@@ -27,6 +27,8 @@ if (run_program == T){
   print("----- RESULTS BACKTESTING -----")
   cat(" .", "\n",".", "\n")
   print(results_backtesting)
+  cat("Chi-sqrd critical calue [df = 1, a = 5%]:,", qchisq(p = .05, df = 1, lower.tail = FALSE),"\n")
+  cat("Chi-sqrd critical calue [df = 2, a = 5%]:,", qchisq(p = .05, df = 2, lower.tail = FALSE),"\n")
   
   
   # safing data files in the data_files folder

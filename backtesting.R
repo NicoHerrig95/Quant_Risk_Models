@@ -170,9 +170,7 @@ for (i in 1 : length(results)){
     mutate(proportion_overshoots = NA,
            LRuc = NA, # Kupiec (1995) unconditional coverage test
            LRcci = NA, # Christoffersen (1998) Interval Forecast Test
-           LRcc = NA, # conditional coverage (CC) mixed test -> LRcc ~ Chisq(df = 2)
-           mean_dev = NA, # mean absolute deviation from real loss
-           max_dev = NA) # max absolute deviation from real loss
+           LRcc = NA) # conditional coverage (CC) mixed test -> LRcc ~ Chisq(df = 2)
 }
 
 
@@ -197,13 +195,12 @@ for (i in 1 : length(test_sets)){
   
   
   # mean dev & max dev
-  results_backtesting[[i]]$mean_dev[1] <- deviation_function(Losses = eval(as.name(test_sets[i]))$one_day_loss,
-                                                               VaR = eval(as.name(test_sets[i]))$non_par_VaR)$mean_dev
+  #results_backtesting[[i]]$mean_dev[1] <- deviation_function(Losses = eval(as.name(test_sets[i]))$one_day_loss,
+  #                                                             VaR = eval(as.name(test_sets[i]))$non_par_VaR)$mean_dev
   
-  
-  results_backtesting[[i]]$max_dev[1] <- deviation_function(Losses = eval(as.name(test_sets[i]))$one_day_loss,
-                                                             VaR = eval(as.name(test_sets[i]))$non_par_VaR)$max_dev
-  
+ 
+  #results_backtesting[[i]]$max_dev[1] <- deviation_function(Losses = eval(as.name(test_sets[i]))$one_day_loss,
+  #                                                           VaR = eval(as.name(test_sets[i]))$non_par_VaR)$max_dev
 
   
   
@@ -233,12 +230,12 @@ for (i in 1 : length(test_sets)){
   
 
   # mean dev & max dev
-  results_backtesting[[i]]$mean_dev[2] <- deviation_function(Losses = eval(as.name(test_sets[i]))$one_day_loss,
-                                                             VaR = eval(as.name(test_sets[i]))$CMM_VaR)$mean_dev
+  #results_backtesting[[i]]$mean_dev[2] <- deviation_function(Losses = eval(as.name(test_sets[i]))$one_day_loss,
+  #                                                           VaR = eval(as.name(test_sets[i]))$CMM_VaR)$mean_dev
   
   
-  results_backtesting[[i]]$max_dev[2] <- deviation_function(Losses = eval(as.name(test_sets[i]))$one_day_loss,
-                                                            VaR = eval(as.name(test_sets[i]))$CMM_VaR)$max_dev
+  #results_backtesting[[i]]$max_dev[2] <- deviation_function(Losses = eval(as.name(test_sets[i]))$one_day_loss,
+  #                                                          VaR = eval(as.name(test_sets[i]))$CMM_VaR)$max_dev
   
   
   
@@ -264,12 +261,12 @@ for (i in 1 : length(test_sets)){
 
   
   # mean dev & max dev
-  results_backtesting[[i]]$mean_dev[3] <- deviation_function(Losses = eval(as.name(test_sets[i]))$one_day_loss,
-                                                             VaR = eval(as.name(test_sets[i]))$GARCH_VaR)$mean_dev
+  #results_backtesting[[i]]$mean_dev[3] <- deviation_function(Losses = eval(as.name(test_sets[i]))$one_day_loss,
+  #                                                           VaR = eval(as.name(test_sets[i]))$GARCH_VaR)$mean_dev
   
   
-  results_backtesting[[i]]$max_dev[3] <- deviation_function(Losses = eval(as.name(test_sets[i]))$one_day_loss,
-                                                            VaR = eval(as.name(test_sets[i]))$GARCH_VaR)$max_dev
+  #results_backtesting[[i]]$max_dev[3] <- deviation_function(Losses = eval(as.name(test_sets[i]))$one_day_loss,
+  #                                                          VaR = eval(as.name(test_sets[i]))$GARCH_VaR)$max_dev
   
 
 }
