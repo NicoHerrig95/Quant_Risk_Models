@@ -9,7 +9,7 @@ run_program = T
 add_info = T
 
 # extracting data files to the data_files folder
-extract_files = F
+extract_files = T
 
 
 ################################################################################
