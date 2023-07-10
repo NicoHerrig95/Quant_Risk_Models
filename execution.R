@@ -15,6 +15,10 @@ add_info = T
 extract_files = F
 
 
+# save results as .csv
+save_results = T
+
+
 ################################################################################
 
 
@@ -29,7 +33,7 @@ if (run_program == T){
   cat(" .", "\n",".", "\n",".", "\n",".", "\n",".", "\n")
   print("----- RESULTS BACKTESTING -----")
   cat(" .", "\n",".", "\n")
-  print(results_backtesting)
+  print(results_backtesting, digits = 3)
   cat("Chi-sqrd critical calue [df = 1, a = 5%]:,", qchisq(p = .05, df = 1, lower.tail = FALSE),"\n")
   cat("Chi-sqrd critical calue [df = 2, a = 5%]:,", qchisq(p = .05, df = 2, lower.tail = FALSE),"\n")
   
@@ -78,6 +82,12 @@ if (run_program == T){
 }
 
 
+if (save_results == T){
+  source("save_results.R")
+  cat("Results successfully saved!", "\n",
+      "Folder:", folder_results)
+  
+}
 
 
 

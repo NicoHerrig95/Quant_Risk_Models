@@ -91,7 +91,7 @@ import_names = c("GSPC", "FTSE", "EUSTOXX")
 NNet_names = c("vanilla", "regularized","C3")
 
 
-
+n_samples_MC = 100000
 
 
 
