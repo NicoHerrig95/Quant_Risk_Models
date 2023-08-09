@@ -33,8 +33,8 @@ par_VaR <- function(returns, alpha, d){
   par_VaR <- rep(NA, length(returns))
   
   for (i in (d+2) : length(returns)){
-    mu = returns[(i-1):(i-d)] %>% mean()
-    sigma = returns[(i-1):(i-d)] %>% sd()
+    mu = returns[(i-1):(i-(d+1))] %>% mean()
+    sigma = returns[(i-1):(i-(d+1))] %>% sd()
     
     par_VaR[i] = mu + z * sigma
   }
@@ -52,7 +52,7 @@ non_par_VaR <- function(returns, alpha, d){
   
   for (i in (d+2) : length(returns)){
     # empirical alpha quantile of the d prior returns
-    non_par_VaR[i] = quantile(returns[(i-1):(i-d)],
+    non_par_VaR[i] = quantile(returns[(i-1):(i-(d+1))],
                               probs = (1 - alpha),
                               na.rm = TRUE)
   }

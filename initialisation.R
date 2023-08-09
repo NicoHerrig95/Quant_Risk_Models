@@ -3,6 +3,14 @@
 ################################################################################   
 
 
+# period -> should be "covid" or "calm"
+period = "calm"
+
+
+
+
+
+
 # setting working directory
 current_path = rstudioapi::getActiveDocumentContext()$path 
 setwd(dirname(current_path ))
@@ -33,12 +41,13 @@ stocks <- c("^GSPC", "^FTSE", "^STOXX50E")
 
 
 
-# start of testing period (separation of train set and test set)
-test_start <- "2021-01-01" # changing depending on new period for data
-test_end <- "2022-12-31"
-
-# period -> should be "covid" or "pre_covid"
-period = "covid"
+if (period == "calm"){
+  test_start <- "2017-01-01" 
+  test_end <- "2018-12-31"
+} else if (period == "covid"){
+  test_start <- "2021-01-01" 
+  test_end <- "2022-12-31"
+}
 
 
 #------------------------- MODEL & VaR SPECIFIC PARAMETERS --------------------#
@@ -62,7 +71,7 @@ alpha = 0.99
 d = 250 # changing to around 1 year!
 
 # Value of reference Portfolio for calculating one-day losses
-Pf <- 1000000
+Pf <- 1
 
 
 

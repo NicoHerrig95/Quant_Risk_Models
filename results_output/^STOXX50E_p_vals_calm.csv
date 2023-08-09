@@ -1,0 +1,7 @@
+"","proportion_overshoots","LRuc","LRcci","LRcc"
+"historical",0.014,0.396,0.656,0.632
+"CMM",0.018,0.106,0.565,0.23
+"GARCH",0.014,0.396,0.656,0.632
+"LSTM_MDN_vanilla",0,0.002,1,0.007
+"LSTM_MDN_reg",0,0.002,1,0.007
+"LSTM_MDN_3C",0,0.002,1,0.007

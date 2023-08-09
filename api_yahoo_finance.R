@@ -30,7 +30,7 @@ for(i in 1 : length(stocks)){
 
 
 
-
+# interpolate NA values using approx() function
 for(i in 1 : length(stocks)){
   assign(stocks[i],
          eval(as.name(stocks[i])) %>% 
@@ -43,7 +43,6 @@ for(i in 1 : length(stocks)){
 for (i in 1 : length(stocks)){
   assign(stocks[i],
          eval(as.name(stocks[i])) %>% 
-           # interpolate NA values using approx() function
            # discrete returns
            mutate(R = discrete_returns(eval(as.name(stocks[i]))$Close)) %>% 
            # log returns

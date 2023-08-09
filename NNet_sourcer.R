@@ -41,7 +41,7 @@ if(source_NNet_results == T){
   NNet_file_names <- NNet_file_names %>% unlist()
   # loading .csv files with results from NNet backend
   for(i in 1 : length(NNet_file_names)){
-    assign(NNet_file_names[i], read_csv(paste0("NNet_results/", NNet_file_names[i] ,".csv"))[,-1])
+    assign(NNet_file_names[i], read_csv(paste0("NNet_data/", NNet_file_names[i] ,".csv"))[,-1])
     
   }
   
@@ -74,6 +74,7 @@ if(source_NNet_results == T){
                                pi2 =  eval(as.name(NNet_file_names[j]))$pi2[i]) %>%
                    quantile(., probs = 1 - alpha) * - Pf))# deriving quantile & multiplying by -Pf
       }
+      print("MC-simulation for 2-component MDN: successfull")
     }
     # simulating returns from 3-Component Gaussian Mixture
     if (grepl("C3", NNet_results[j]) == TRUE){
@@ -98,6 +99,7 @@ if(source_NNet_results == T){
         
         
       }
+      print("MC-simulation for 3-component MDN: successfull")
     }
   }
   

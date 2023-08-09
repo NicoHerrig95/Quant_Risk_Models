@@ -16,9 +16,10 @@ extract_files = F
 
 
 # save results as .csv
-save_results = T
+save_results = F
 
 
+save_test_sets = T
 ################################################################################
 
 
@@ -38,7 +39,7 @@ if (run_program == T){
   cat("Chi-sqrd critical calue [df = 2, a = 5%]:,", qchisq(p = .05, df = 2, lower.tail = FALSE),"\n")
   
   
-  # safing data files in the data_files folder
+  # saving data files in the data_files folder
   if (extract_files == T) {
     # defining file path of data extraction file
     extraction_path = paste0(getwd(),"/data_files/")
@@ -49,6 +50,22 @@ if (run_program == T){
                 file = paste0(extraction_path, stocks[i],".csv"))
     }
     
+  }
+  
+  
+  
+  
+  # saving test sets
+  if (save_test_sets == T){
+    #folder_path
+    folder_test_sets = paste(sep = "/", getwd(), "test_sets/") 
+    
+    
+    for(i in 1 : length(test_sets)){
+      filename = paste0(folder_test_sets,stocks[i],"_test_set_",period,".csv")
+      write.csv(x = eval(as.name(test_sets[i])), file = filename)
+      cat("----- test set for",stocks[i],"(",period," period ) successfully saved -----")
+    }
   }
   
   
