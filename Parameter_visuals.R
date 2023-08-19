@@ -55,7 +55,7 @@ if(period == "calm"){
                              sigma_1_vanilla = FTSE_vanilla_calm$sigma1,
                              sigma_2_vanilla = FTSE_vanilla_calm$sigma2,
                              mu_1_vanilla = FTSE_vanilla_calm$mu1,
-                             mu_2_vanilla = FTSE_vanilla_calm$mu,
+                             mu_2_vanilla = FTSE_vanilla_calm$mu2,
                              pi_1_reg = FTSE_regularized_calm$pi1,
                              pi_2_reg = FTSE_regularized_calm$pi2,
                              sigma_1_reg = FTSE_regularized_calm$sigma1,
