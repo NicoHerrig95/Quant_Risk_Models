@@ -1,9 +1,9 @@
-# Quantitative Risk Models  (WORKING PROJECT)
+# Quantitative Risk Models  (MSc Dissertation Repo)
 
-## *WORKING PROJECT* --- Code library for automated computation of Value-at-Risk based on different Time Series Models and Neural Networks.  
+### --> Repo contains parts of my MSc dissertation project, for reusage. Code provides a framework written in R for automated computation of VaR based on different time series models (GARCH, CMM, historical simulation) and experimental neural networks (LSTM-MDN architecture, implemented in python using TensorFlow/Keras framework).   
 
 ## Overview
-TBC
+
 
 ## Instruction
 TBC
