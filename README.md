@@ -5,10 +5,3 @@
 ## Description
 The repo mainly contains an automated pipeline downloading stock data, training various models for VaR calculation and running backtesting on each model. Code can be fully run via one-line execution (by running the **execution.R** script).
 
-## Instruction
-1. 
-2. 
-
-## Code and Scripts 
-TBC
-
